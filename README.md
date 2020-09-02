@@ -1,0 +1,1 @@
+# Preparing-for-the-Google-Cloud-Professional-Cloud-Architect-Exam
