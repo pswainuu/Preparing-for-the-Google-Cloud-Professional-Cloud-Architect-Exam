@@ -1,0 +1,27 @@
+Case Study 2
+Case Study 02: Provision and Manage
+
+One thing I see with every large customer is that they have business requirements; they want to document resources. If I'm paying the bill, I want to know who is consuming resources, spinning up VMs for example. And I want to know that this is going through some sort of review process.
+
+This customer wanted me to minimize the impact to the developer productivity. As soon as you start to add any sort of process, you slow things down. And they were very concerned that I not hurt their productivity. That was both a technical requirement and a business requirement.
+
+A customer had this interesting business requirement...
+
+Cloud infrastructure resource provisioning must be documented and auditable
+Changes to the cloud infrastructure must go through a review process
+Specific: Must minimize impact to developer velocity
+We immediately knew that part of the solution was "infrastructure as code". There are a lot of reasons to implement infrastructure as code. But forcing a solution into this implementation means you get the benefits of auditing, code review, and all those things that help satisfy the business requirement.
+
+The customer has dozens of development teams but only one Cloud Engineer. So the solution needed to be distributed. Each team is actually responsible for owning their own process.
+
+We mapped that to technical requirements like this…
+
+Provisioning infrastructure should be done as Infrastructure as Code
+Specific: Decentralize approval/code review process. Teams should own process.
+And this is how we implemented that technical requirement.
+
+Terraform/Deployment Manager
+IAM Strategy - Least Privilege
+Service Accounts
+Specific: Utilize source control options, such as Github Enterprise
+They use Github Enterprise with a code owners file. The file is a text file that limits who can actually perform actions in the repository.
