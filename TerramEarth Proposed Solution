@@ -1,0 +1,22 @@
+Solution by Sudhamshu B N
+Business requirements do not state it clearly, but in a first step the existing infrastructure could be moved to the cloud. TerramEarth would just lift-and-shift all the VMs running off-the-shelf Windows applications. An estimate of the cost can be obtained using Google Cloud Platform Pricing Calculator. The software licenses will be transferred to GCP VMs. The option of replacing PostgresSQL by CloudSQL is out of question, as the following evolutions drive towards a different directions. This step is optional, and the cost/benefit ratio should be evaluated before proceeding further.
+
+The thick and beefy part comes next, when we start leveraging the superpowers of the Cloud.
+
+New software needs to be written (or bought and then customized). It needs to be specific to the format of data produced by TerramEarth vehicles (currently .gzip file, but in the future more and more vehicles will stream directly to 5G). Whichever solution is chosen, a significant investment is needed at this stage. Also, software in TerramEarth vehicles should be modified to fit into this new ecosystem.
+
+Compute part
+
+More and more TerramEarth vehicles will be connected via 5G. This will help decrease unplanned vehicle downtime. These vehicles will send data to IoT Core. Then Cloud Pub/Sub will compensate for delays and unstable connections. Data will be processed by DataProc and ultimately sent to BigQuery.
+
+The remaning portion of TerramEarth vehicles will still generate gzip files (which are extracted while vehicles are being serviced). Data will follow a chain that is similar to the current one. Data will be sent to Cloud Storage, then unzipped on the fly. Dataflow will handle the processing of data, which will eventually reach BigQuery where it will be analyzed.
+
+Data warehouse part
+
+The current datawarehouse will be replaced by BigQuery, that has no limitations on the number of licenses, thus can be simultaneously accessed by all of the analysts. Data Studio can be used to visualize data in a meaningful way, and to provide insights for dealers worldwide. Also, reports for seed and fertilizer suppliers will be produced, to help them prepare compelling joint offerings for their customers.
+
+Currently only one on-prem datacenter exists, located in the U.S. west-coast. During the period of time where data migration will take place, Direct Interconnect to a Google POP will be used. Subsequently, a cheaper alternative for connection to on-prem will be used, as the on-prem datacenter will no longer host the production environment.
+
+GCP resources will use a single VPC network with two subnets, one on the West coast, one on the East coast. Resources will be milti-regional to help create a backup strategy. Reports will be made available to dealers, as well to seed and fertilizer suppliers, in a Cloud Storage bucked, cached with Cloud CDN to improve speed, with access controlled by IAM roles.
+
+Security will be enforced by encrypting all connections using SSL and data will be encripted at rest using CSEK, stored in an on-premises datacenter (that still continues to exist for development and testing environments, amongst other things).
