@@ -1,0 +1,11 @@
+Solution by Sudhamshu B N
+Use App Engine to build microservices (This provides the necessary scale and easy replication)
+Use Cloud Deployment Manager to deploy applications and implement a CI/CD pipeline
+Use Global HTTP(S) Proxy and allow it to divert traffic in the scenario of disaster recovery
+Encryption is provided at rest by default, provide option of managing CSEK(Customer Supplied Encryption Key)
+Use Firewall to filter and allow only HTTPS traffic and setup certificates
+Move MySQL to Cloud SQL
+Use Cloud dataproc for batch processing and Hadoop/Spark workload
+Use Cloud Pub/Sub for messaging
+Use Cloud Storage as storage bucket, will probably need to build a cloud interconnect connection if we plan to keep the data center or move it via offline disk mailing option
+You could build Jenkins in the Cloud via a provisioned VM with Jenkins
