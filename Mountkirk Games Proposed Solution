@@ -1,0 +1,43 @@
+Solution:
+
+Business
+
+expand new markets globally
+track and reduce amount of time games are not available
+monitor performance and other metrics to inform R&D/investments
+ideally no-ops
+scale down and scale up
+Technical
+
+External Load Balancer
+
+Anycast IP route to the nearest region, low latency access to services & resources
+Cloud CDN with GCS
+
+Store static objects in GCS standard class
+Cache locally with CDN to provide low latency access
+Cloud Operations
+
+Monitoring for performance, uptime and custom metrics, alerting policies
+Dashboards
+Tracer, Debugger & Profiler to help improve App performance, latency
+Logging - sync logs to pub/sub for processing
+Firebase Hosting
+
+Client / Web App
+Live sync, Offline Apps - improved UX, no data loss, manage data when connectivity is not stable
+Game Services
+
+GKE based game services
+Ingress via Google Load Balancer , apply Cloud Armour for DDOS. Traffic comes into GCP.
+Ingress via Edge Proxy Gateway, apply additional security policies, routing using Traffic Director, i.e. routing based on weight.
+Game databases
+
+Cloud Firestore, user profiles, offline / live sync
+Cloud Memorystore, low latency cache connected to Game Services. Data comes from Cloud Spanner.
+Cloud Spanner, game state.
+Analytics
+
+Cloud Pub/Sub. Logs from Cloud Logging. Events go to specific topics based on type of event and priority. Helps with scale.
+Cloud Dataflow. Serverless Hadoop. Stream processing. Enrich events, ETL process and persist to BigTable for Timeseries (managed NoSQL). Also aggregate and persist into BigQuery for OLAP.
+BigQuery, use BQML, and Looker for visualisation.
